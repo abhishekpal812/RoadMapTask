@@ -5,11 +5,7 @@ import com.example.roadmap.day3.repository.StudentRepository;
 import com.example.roadmap.day3.response.ResponseWrapper;
 import com.example.roadmap.exception.customClass.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.awt.geom.RectangularShape;
-import java.util.Optional;
 
 @Service
 public class StudentService {
