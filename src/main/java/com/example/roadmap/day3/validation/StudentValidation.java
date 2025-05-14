@@ -1,6 +1,7 @@
 package com.example.roadmap.day3.validation;
 
 import com.example.roadmap.day3.Entity.Student;
+import com.example.roadmap.day3.request.RequestWrapper;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -14,9 +15,9 @@ public class StudentValidation {
         }
     }
 
-    public void validateStudentObject(Student student){
-        if(Objects.isNull(student) || Objects.isNull(student.getName()) || student.getName().isEmpty() || Objects.isNull(student.getCity()) || student.getCity().isEmpty()){
-            throw new IllegalArgumentException("Parameter missing in request json : "+ student);
+    public void validateStudentObject(RequestWrapper requestWrapper){
+        if(Objects.isNull(requestWrapper) || Objects.isNull(requestWrapper.getName()) || requestWrapper.getName().isEmpty() || Objects.isNull(requestWrapper.getContactNumber()) || requestWrapper.getContactNumber().isEmpty() || Objects.isNull(requestWrapper.getEmail()) || requestWrapper.getEmail().isEmpty()){
+            throw new IllegalArgumentException("Parameter missing in request json : "+ requestWrapper);
         }
     }
 }

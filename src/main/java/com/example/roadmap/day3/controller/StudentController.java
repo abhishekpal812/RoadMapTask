@@ -1,6 +1,7 @@
 package com.example.roadmap.day3.controller;
 
 import com.example.roadmap.day3.Entity.Student;
+import com.example.roadmap.day3.request.RequestWrapper;
 import com.example.roadmap.day3.response.ResponseWrapper;
 import com.example.roadmap.day3.service.StudentService;
 import com.example.roadmap.day3.validation.StudentValidation;
@@ -25,15 +26,15 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseWrapper createStudent(@RequestBody Student student){
-        validation.validateStudentObject(student);
-        return new ResponseWrapper(201,studentService.createStudent(student));
+    public ResponseWrapper createStudent(@RequestBody RequestWrapper requestWrapper){
+        validation.validateStudentObject(requestWrapper);
+        return new ResponseWrapper(201,studentService.createStudent(requestWrapper));
     }
 
     @PutMapping("/update")
-    public ResponseWrapper updateStudent(@RequestBody Student student){
-        validation.validateStudentObject(student);
-        return new ResponseWrapper(201,studentService.updateStudent(student));
+    public ResponseWrapper updateStudent(@RequestBody RequestWrapper requestWrapper){
+        validation.validateStudentObject(requestWrapper);
+        return new ResponseWrapper(201,studentService.updateStudent(requestWrapper));
     }
 
     @DeleteMapping("/delete/{studentId}")

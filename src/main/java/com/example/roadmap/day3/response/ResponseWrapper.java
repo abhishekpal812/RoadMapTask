@@ -6,14 +6,19 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
-@NoArgsConstructor
+ @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseWrapper {
     private Integer studentId;
     private String studentName;
-    private String studentCity;
+    private String studentContactNumber;
+    private String studentEmail;
+    private String house;
+    private String city;
+    private String state;
+    private Integer pin;
     private Integer statusCode;
     private String errorMessage;
 
@@ -22,7 +27,7 @@ public class ResponseWrapper {
         this.errorMessage=errorMessage;
     }
 
-    public ResponseWrapper(Integer statusCode,Integer studentId){
+    public  ResponseWrapper(Integer statusCode,Integer studentId){
         this.statusCode=statusCode;
         this.studentId=studentId;
     }
