@@ -1,6 +1,5 @@
 package com.example.roadmap.unitTests;
 
-import com.example.roadmap.day3.Entity.Address;
 import com.example.roadmap.day3.Entity.Student;
 import com.example.roadmap.day3.controller.StudentController;
 import com.example.roadmap.day3.request.RequestWrapper;
@@ -28,10 +27,10 @@ public class StudentControllerTests {
 
     @Test
     void testGetStudent() throws Exception {
-        Student student = getStudent();
+        Student student = TestUtils.getStudent();
         Mockito.doNothing().when(studentValidation).notEmpty(1);
         Mockito.when(studentService.getStudent(1)).thenReturn(student);
-        Mockito.when(studentService.convertStudentResponse(student)).thenReturn(getResponseWrapper());
+        Mockito.when(studentService.convertStudentResponse(student)).thenReturn(TestUtils.getResponseWrapper());
         ResponseWrapper response = controller.getStudent(1);
         Assert.notNull(student,"Getting student as null");
     }
@@ -61,36 +60,6 @@ public class StudentControllerTests {
         ResponseWrapper responseWrapper = controller.deleteStudent(1);
         Assert.isTrue(responseWrapper.getStatusCode().equals(204),"Getting wrong status code :"+responseWrapper.getStatusCode());
         Assert.isTrue(responseWrapper.getStudentId().equals(1),"Getting wrong student id : "+responseWrapper.getStudentId());
-    }
-
-
-    private Student getStudent(){
-        Student student = new Student();
-        student.setId(1);
-        student.setName("Pawan");
-        student.setEmail("pawan@gmail.com");
-
-        Address address = new Address();
-        address.setId(1);
-        address.setHouse("111, Shri balaji residency");
-        address.setCity("Indore");
-        address.setState("Madhya Pradesh");
-        address.setPin(452010);
-
-        student.setAddress(address);
-        return student;
-    }
-
-    ResponseWrapper getResponseWrapper(){
-        ResponseWrapper responseWrapper = new ResponseWrapper();
-        responseWrapper.setStudentId(1);
-        responseWrapper.setStudentName("Pawan");
-        responseWrapper.setStudentEmail("pawan@gmail.com");
-        responseWrapper.setCity("Indore");
-        responseWrapper.setState("Madhya Pradesh");
-        responseWrapper.setPin(452010);
-        responseWrapper.setHouse("111, Shri balaji residency");
-        return responseWrapper;
     }
 
 }
