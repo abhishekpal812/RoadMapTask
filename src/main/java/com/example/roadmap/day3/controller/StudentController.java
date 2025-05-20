@@ -7,6 +7,7 @@ import com.example.roadmap.day3.service.StudentService;
 import com.example.roadmap.day3.validation.StudentValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/student/")
@@ -42,6 +43,11 @@ public class StudentController {
         validation.notEmpty(studentId);
         studentService.deleteStudent(studentId);
         return new ResponseWrapper(204,studentId);
+    }
+
+    @PostMapping("/upload")
+    public String importStudentDetails(@RequestPart(value = "file") MultipartFile file){
+        return studentService.uploadFile(file);
     }
 
 }
