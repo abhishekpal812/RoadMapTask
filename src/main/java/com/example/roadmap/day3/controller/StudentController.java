@@ -5,7 +5,9 @@ import com.example.roadmap.day3.request.RequestWrapper;
 import com.example.roadmap.day3.response.ResponseWrapper;
 import com.example.roadmap.day3.service.StudentService;
 import com.example.roadmap.day3.validation.StudentValidation;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +17,9 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
 
     @Autowired
     private StudentValidation validation;
@@ -29,7 +34,9 @@ public class StudentController {
     @PostMapping("/create")
     public ResponseWrapper createStudent(@RequestBody RequestWrapper requestWrapper){
         validation.validateStudentObject(requestWrapper);
-        return new ResponseWrapper(201,studentService.createStudent(requestWrapper));
+        Integer student = studentService.createStudent(requestWrapper);
+        kafkaTemplate.send("NewTopic",String.valueOf(student));
+        return new ResponseWrapper(201,student);
     }
 
     @PutMapping("/update")
