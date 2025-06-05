@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  web:
+    image: 'roadmap:1.0.0'
+  database:
+    image: 'mysql:latest'
